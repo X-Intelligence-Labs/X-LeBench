@@ -7,7 +7,7 @@
   <a href="https://huggingface.co/datasets/VvV7/X-LeBench" target='_blank'>
     <img src="https://img.shields.io/badge/Dataset-🤗-b8559b?style=flat">
   </a>
-  <a href="https://github.io/" target='_blank'>
+  <a href="https://vvv7z.github.io/X-LeBench/" target='_blank'>
     <img src="https://img.shields.io/badge/Project Page-X--LeBench-b8559b?style=flat">
   </a>
 </p>
