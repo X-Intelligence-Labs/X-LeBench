@@ -33,7 +33,6 @@ Please refer to our [paper](https://arxiv.org/abs/2501.06835) and [project page]
 X-LeBench/
 │── assets/                # Images and shared visual assets
 │── generation/            # Life-logging simulation pipeline implementation
-│── evaluation/            # Benchmark evaluation code
 │── README.md              # Project entry and setup instructions
 ```
 
