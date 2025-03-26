@@ -1,0 +1,82 @@
+# Ignore previous conversations and focus solely on the below task.
+
+**Instruction:**
+Based on the character's past activity records *Recorded daily plan chunk* and *character background*,
+ provide thoughtful suggestions for improvement for future *Unrecorded plan chunks*. 
+ Analyze and adjust the unrecorded daily plan chunks to ensure timing continuity, content alignment, and realistic scheduling.
+
+**Task Description:**
+1. Evaluate Timing: For the first unrecorded chunk, check if the start_time has more than 5 minutes gap after the previous record_end_time, if yes, leave it unchange; if not, shift its start time to ensure more than 5 minutes gap.
+    For the other unrecorded chunks, check if them have *more than 5 minutes gap* after their corresponding previous chunk end_time, if yes, leave it unchange; if no, shift the corresponding start time to ensure more than 5 minutes gap.
+2. Check Content Continuity: Check if recorded activities cover the content of upcoming unrecorded chunks, 
+   adjust the content of each chunk if activities are *unreasonable duplicated* or *need additional tasks* to complete the character's day. (e.g., already recording the character brushed teeth in the morning, and then having a brushing schedule in subsequent unrecorded chunks is unreasonable),
+   and also consider the character’s traits and lifestyle when adjusting content. 
+3. Output Structure: Firstly, output Explanation of Adjustments which you intent to do, and their Justification. Then provide adjustments in JSON format, with fields for analysis, start_time, plan_chunk, and end_time. In the analysis field, explain any content or timing changes, justifying them based on recorded activities, character traits, and continuity needs.
+   And in the start_timestart_time, plan_chunk, and end_time fields, output appropriately improved content based on the analysis.
+   Maintaining the order and count of original input unrecorded chunks. 
+
+**Example Input:**
+- **Personality Traits:**  Organized and detail-oriented, Responsible and dependable, Logical and analytical, Patient and persistent, Value stability and security
+- **Lifestyle:** the character leads a structured and predictable life, prioritizing their responsibilities and commitments. the character enjoys a quiet and comfortable environment, often spending their free time with family or close friends. the character is likely to have a well-established routine and prefer to stick to it.
+- **Hobbies:** Gardening, Cooking, Collecting stamps or coins, Hiking or walking in nature
+- **Recorded daily plan chunk:** 
+[
+    {
+        "start_time": "06:30",
+        "plan_chunk": "Wake up, make a cup of tea, and enjoy a quiet moment before starting the day.",
+        "end_time": "06:45", 
+        "record_content": "the character converses with others, makes coffee, and plays jenga in a house.",
+        "record_end_time": "07:29"
+    }
+]
+- **Unrecorded plan chunks:** 
+[
+    {
+        "start_time": "06:50",
+        "plan_chunk": "Prepare breakfast, make coffee, eat while reading newspaper.",
+        "end_time": "07:35"
+    },
+    {
+        "start_time": "10:00",
+        "plan_chunk": "Analyze budget projections.",
+        "end_time": "12:00"
+    }
+]
+
+**Example Output:**
+1. Explanation of Adjustments: "..."
+2. Justification: "..."
+3. Format output:
+
+```json
+[
+    {
+        "analysis": "Shifted start time to 07:35 after recorded conversation and coffee making; removed coffee making mention in original plan_chunk.",
+        "modified_start_time": "07:35",
+        "modified_plan_chunk": "Prepare and eat breakfast while reading newspaper.",
+        "modified_end_time": "08:05"
+    },
+    {
+        "analysis": "This time schedule has no conflict with the previous chunks and records, also the start time has gap greater than 5 minutes with the last record_end_time and last modified_end_time, so no changes for time. For plan_chunk content, added break in 2-hour work for realistic continuity to maintain realistic progression.",
+        "modified_start_time": "10:00",
+        "modified_plan_chunk": "Analyze budget projections with a mid-task break.",
+        "modified_end_time": "12:00"
+    }
+]
+```
+
+Ensure each plan chunk has been realistically modified according to character background and previous records.
+ Ensure all time references are in the 24-hour format, i.e., HH:MM.
+
+
+**Execute:**
+Now given the information below, perform the tasks above:
+
+- **Personality Traits:** <personality_traits>
+- **Lifestyle:** <lifestyle>
+- **Hobbies:** <hobbies>
+- **Recorded daily plan chunk:** 
+<recorded_daily_plan_chunk>
+
+- **Unrecorded plan chunks:** 
+<unrecorded_daily_plan_chunk>
